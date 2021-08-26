@@ -26,8 +26,8 @@ document.querySelector("#start_chat").addEventListener("click", (event) => {
   });
 
   socket.on("client_list_all_messages", (messages) => {
-    const template_client = document.getElementById("message-user-template").innerHTML;
-    const template_admin = document.getElementById("admin-template").innerHTML;
+    let template_client = document.getElementById("message-user-template").innerHTML;
+    let template_admin = document.getElementById("admin-template").innerHTML;
 
     messages.forEach(message => {
       if(message.admin_id === null) {
