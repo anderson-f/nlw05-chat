@@ -82,9 +82,9 @@ function sendMessage(id) {
   const createDiv = document.createElement("div");
   createDiv.className = "admin_message_admin";
   createDiv.innerHTML = `Atendente: <span>${params.text}</span>`;
-  createDiv.innerHTML += `<span class="admin_date>${dayjs().format(
+  createDiv.innerHTML += `<span class="admin_date">${dayjs().format(
     "DD/MM/YYYY HH:mm:ss"
-  )}`;
+  )}</span>`;
 
   divMessages.appendChild(createDiv);
 
@@ -92,7 +92,6 @@ function sendMessage(id) {
 }
 
 socket.on("admin_receive_message", (data) => {
-  console.log(data);
   const connection = connectionsUsers.find(
     (connection) => (connection.socket_id = data.socket_id)
   );
