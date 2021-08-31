@@ -1,7 +1,9 @@
 const socket = io();
 let connectionsUsers = [];
+let clientInSuport = [];
 
 socket.on("admin_list_all_users", (connections) => {
+
   connectionsUsers = connections;
   document.getElementById("list_users").innerHTML = "";
 
@@ -35,7 +37,9 @@ function call(id) {
     user_id: connection.user_id,
   };
 
-  // socket.emit("admin_user_in_support", params);
+  socket.emit("admin_user_in_support", params);
+
+  clientInSuport.push(connection)
 
   socket.emit("admin_list_messages_by_user", params, (messages) => {
     const divMessages = document.getElementById(
@@ -92,7 +96,8 @@ function sendMessage(id) {
 }
 
 socket.on("admin_receive_message", (data) => {
-  const connection = connectionsUsers.find(
+
+  const connection = clientInSuport.find(
     (connection) => (connection.socket_id = data.socket_id)
   );
 

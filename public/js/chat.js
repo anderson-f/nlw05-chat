@@ -1,8 +1,9 @@
 let socket_admin_id = null;
 let emailUser = null;
+let socket = null;
 
 document.querySelector("#start_chat").addEventListener("click", (event) => {
-  const socket = io();
+  socket = io();
 
   const chat_help = document.getElementById("chat_help");
   chat_help.style.display = "none";
@@ -62,6 +63,11 @@ document.querySelector("#start_chat").addEventListener("click", (event) => {
 
     document.getElementById("messages").innerHTML += rendered;
   });
+
+  socket.on("admin_started_support", params => {
+    socket_admin_id = params.socket_admin_id
+  })
+
 });
 
 document
@@ -85,4 +91,6 @@ document
     });
 
     document.getElementById("messages").innerHTML += rendered;
+
+    text.value = "";
   });
